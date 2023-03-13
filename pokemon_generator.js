@@ -35,6 +35,7 @@ try {
     })
     .then(data => {
       const pokemons = data.flavor_text_entries;
+      let color= data.color.name;
       for (const element of pokemons) {
         if (element.language.name === 'en') {
           pokemon_text = element.flavor_text;
@@ -54,7 +55,39 @@ try {
           break;
         }
     } 
-      document.getElementById('pokemon_name').innerHTML =pokemon_name +": ";
+    if(color=="red"){
+      color="#FF6961"; // pastel red
+    }
+    else if(color=="blue"){
+      color="#AEC6CF"; // pastel blue
+    }
+    else if(color=="yellow"){
+      color="#F2D49B"; // pastel yellow
+    }
+    else if(color=="green"){
+      color="#77DD77"; // pastel green
+    }
+    else if(color=="black"){
+      color="#A9A9A9"; // pastel black (light gray)
+    }
+    else if(color=="brown"){
+      color="#DDBEA9"; // pastel brown
+    }
+    else if(color=="purple"){
+      color="#B19CD9"; // pastel purple
+    }
+    else if(color=="gray"){
+      color="#FAC898"; // pastel gray
+    }
+    else if(color=="white"){
+      color="#97A2FF"; // pastel white
+    }
+    else if(color=="pink"){
+      color="#FFB6C1"; // pastel pink
+    }
+      
+      document.getElementById('pokemon_name').style.color =color;
+      document.getElementById('pokemon_name').innerHTML =pokemon_name;
       console.log(pokemon_text)
       document.getElementById('pokemon_description').innerHTML =html;
       fetch(sprite_url)
