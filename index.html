@@ -13,6 +13,40 @@
     margin: 0px;
     background-color: #181818;
     }
+    .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
     #pokemon_description {
       font-weight: normal;
       font-size: 15px;
@@ -87,7 +121,7 @@
     <div class="col-sm">
         <p>
             <h1 class="mb-2" style="background: linear-gradient(to right, #338585, #181818);" id="titles">&nbsp;A wild&nbsp;<b id="pokemon_name" ></b> has appeared! <img class="user-select-none float-right mx-auto"  style="max-width: 100%;" id="ae" onclick="document.getElementById('ae').style.filter='none'"></img></h1>
-            
+
             <b id="pokemon_description"></b>
         </p>
         
@@ -100,10 +134,17 @@
           <input type="text"  autocomplete="off" style="font-family: 'Poke', sans-serif;" class="form-control m-auto" name="add" id="add">
         </form>
         <!--  LIST  -->
-          <ul class="list-group todos mx-auto text-light"></ul>
+          <ul class="list-group todos mx-auto text-light" style="margin-bottom: 20px;"></ul>
         </div>
+        <div id="end_button" class="text-center">
+          <button type="button" style="font-family: 'Poke', sans-serif;" class="btn btn-primary btn-center" onclick="btn()">End the day</button>
+      </div>
     </div>
-    
+</div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close text-center" style="font-family: 'Title', sans-serif;" id="tasks" onclick="cls()">&times;</span>
+  </div>
 </div>
 <script src="todo.js"></script>
 </body>
