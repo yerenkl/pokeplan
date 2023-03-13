@@ -9,7 +9,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <script src="pokemon_generator.js"></script>
   <style>
-    
     body{
     margin: 0px;
     background-color: #181818;
@@ -50,7 +49,6 @@
       font-size: 20px;
       font-family: 'Poke', sans-serif;
       color: #ffffff;
-      margin-top: -30px;
     }
     #title2 {
       font-size: 20px;
@@ -61,11 +59,11 @@
     input[type=text],
     input[type=text]:focus{
       color: #fff;
-      border: none;
       background-color: #338585;
     }
 
     li.list-group-item{
+      font-family: 'Poke', sans-serif;
       background-color: #423a6f;
       color: #F8F9FA;
     }
@@ -73,7 +71,6 @@
     .delete{
       cursor: pointer;
     }
-
 
     .filtred{
       display: none !important;
@@ -92,7 +89,7 @@
         <!--  FORM  -->
         <form class="add text-center my-4">
           <label for="add" style="font-family: 'Poke', sans-serif;" class="add text-light">PLAN YOUR DAY:</label>
-          <input type="text" style="font-family: 'Poke', sans-serif;" class="form-control m-auto" name="add" id="add">
+          <input type="text"  autocomplete="off" style="font-family: 'Poke', sans-serif;" class="form-control m-auto" name="add" id="add">
         </form>
         <!--  LIST  -->
           <ul class="list-group todos mx-auto text-light"></ul>

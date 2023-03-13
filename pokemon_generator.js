@@ -1,3 +1,11 @@
+let yymmdd=function(){
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // add leading zero if needed
+  const day = String(now.getDate()).padStart(2, '0'); // add leading zero if needed
+  const today = `${year}${month}${day}`;
+  return today
+}
 
 let iterativeFunction = function (arr, x) {
     let start=0, end=arr.length-1;
@@ -11,22 +19,46 @@ let iterativeFunction = function (arr, x) {
             end = mid - 1;
      }
     return false;
-    }
+}
 
-    random_number=String(Math.floor(Math.random() * 905));
+
+    let random_number=String(Math.floor(Math.random() * 905));
     shiny_chance=Math.floor(Math.random() * 200);
     k=0;
-    const baseUrl = 'https://pokeapi.co/api/v2/pokemon-species/'+random_number;
     legendary_array=[143,144,145,149,150,242,243,244,248,249,250,376,377,378,379,
     380,381,382,383,384,385,479,480,481,482,483,484,485,486,487,488,489,490,
     491,492,493,637,638,639,640,641,642,643,644,645,646,647,648,715,716,717,
     718,719,720,784,785,786,787,788,789,790,791,806,887,888,889,890,891,892,893,894,895,896,897,904]
 
-    while(iterativeFunction(legendary_array,parseInt(random_number)) && k<10){
+    while(iterativeFunction(legendary_array,parseInt(random_number)) && k<5){
       random_number=String(Math.floor(Math.random() * 905));
       k++;
-    }
+    }  
 
+    if(localStorage.getItem("last_date") != null){
+      if(localStorage.last_date==yymmdd()){
+        random_number=localStorage.last_number
+        shiny_chance=localStorage.shiny_chance
+        localStorage.last_date=yymmdd()
+      }
+      else{
+        localStorage.clear()
+        localStorage.last_date=yymmdd()
+        localStorage.last_number=random_number
+        localStorage.shiny_chance=shiny_chance
+      }
+    }
+    else{
+      localStorage.last_number=random_number
+      localStorage.last_date=yymmdd()
+      localStorage.shiny_chance=shiny_chance
+    }
+    console.log(localStorage.last_number)
+    console.log(localStorage.last_date)
+    console.log(yymmdd())
+    console.log(random_number)
+    
+    const baseUrl = 'https://pokeapi.co/api/v2/pokemon-species/'+random_number;
 try {
   fetch(baseUrl)
     .then(response => {
@@ -59,16 +91,13 @@ try {
       color="#FF6961"; // pastel red
     }
     else if(color=="blue"){
-      color="#AEC6CF"; // pastel blue
+      color="#4b99e7"; // pastel blue
     }
     else if(color=="yellow"){
       color="#F2D49B"; // pastel yellow
     }
     else if(color=="green"){
       color="#77DD77"; // pastel green
-    }
-    else if(color=="black"){
-      color="#A9A9A9"; // pastel black (light gray)
     }
     else if(color=="brown"){
       color="#DDBEA9"; // pastel brown
@@ -104,7 +133,7 @@ try {
             sprite = data.sprites.front_default;
           }
           document.getElementById('ae').src = sprite;
-          document.getElementById('ae').style.filter="brightness(0)"
+          // document.getElementById('ae').style.filter="brightness(0)"
           
         })
         .catch(error => {

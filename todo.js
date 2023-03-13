@@ -1,16 +1,28 @@
 const addForm = document.querySelector("form.add");
 const ul = document.querySelector("ul.todos");
-const searchFormInput = document.querySelector("form.search input");
 
-//ADD NEW TODO
+// Get the todo list from local storage
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+// Render the todo list
+const renderTodos = () => {
+  ul.innerHTML = "";
+  todos.forEach((todo) => {
+    const html = `
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>${todo}</span>
+        <i class="far fa-trash-alt delete"></i>
+      </li>
+    `;
+    ul.innerHTML += html;
+  });
+};
+
+// Add new todo
 const handleAddItem = (inputValue) => {
-  const html = `
-   <li class="list-group-item d-flex justify-content-between align-items-center">
-      <span>${inputValue}</span>
-      <i class="far fa-trash-alt delete"></i>
-    </li>
-  `;
-  ul.innerHTML += html;
+  todos.push(inputValue);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  renderTodos();
 };
 
 addForm.addEventListener("submit", (e) => {
@@ -20,27 +32,15 @@ addForm.addEventListener("submit", (e) => {
   addForm.add.value = "";
 });
 
-//REMOVE TODO
+// Remove todo
 ul.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete")) {
-    e.target.parentElement.remove();
+    const todo = e.target.parentElement.querySelector("span").textContent;
+    todos = todos.filter((item) => item !== todo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    renderTodos();
   }
 });
 
-//SEARCH INPUT: PREVENT DEFAULT ACTION - LITTLE BUG I FOUND IN THE COURSE PROJECT
-searchFormInput.parentElement.addEventListener("submit", (e) =>
-  e.preventDefault()
-);
-
-//SEARCH AND FILTER TODOS
-const filterItems = (value) => {
-  Array.from(ul.children).forEach((li) => {
-    if (!li.textContent.toLowerCase().includes(value)) li.classList.add("filtred");
-    else li.classList.remove("filtred");
-  });
-};
-
-searchFormInput.addEventListener("keyup", (e) => {
-  const value = searchFormInput.value.toLowerCase().trim();
-  filterItems(value);
-});
+// Render the initial todo list
+renderTodos();
