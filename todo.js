@@ -4,6 +4,7 @@ var modal = document.getElementById('myModal');
 var span = document.getElementById("close");
 // Get the todo list from local storage
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
+var flag=0;
 
 // Render the todo list
 const renderTodos = () => {
@@ -37,7 +38,15 @@ const btn = () => {
 };
 
 function strike(elem) {
-  elem.style.textDecoration = "line-through";
+  if(flag==0){
+    elem.style.textDecoration = "line-through";
+    flag=1
+  }
+  else{
+    elem.style.textDecoration = "none";
+    flag=0;
+  }
+  
 }
 // Add new todo
 const handleAddItem = (inputValue) => {
