@@ -35,6 +35,12 @@ let iterativeFunction = function (arr, x) {
       k++;
     }  
 
+    if(localStorage.getItem("first_time") == null){
+      localStorage.clear()
+      localStorage.first_time=1;
+    }
+
+
     if(localStorage.getItem("last_date") != null){
       if(localStorage.last_date==yymmdd()){
         random_number=localStorage.last_number
@@ -46,6 +52,7 @@ let iterativeFunction = function (arr, x) {
         localStorage.clear()
         localStorage.setItem('pokeArray', JSON.stringify(myArray));
         localStorage.todays_catch=0
+        localStorage.first_time=1;
         localStorage.last_date=yymmdd()
         localStorage.last_number=random_number
         localStorage.shiny_chance=shiny_chance
