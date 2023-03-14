@@ -63,6 +63,11 @@ console.log(lenn)
           const img = document.createElement('img');
           img.src = sprite;
           img.title = name; // Set the title attribute to the Pokemon's name
+          pokemodal.addEventListener('click', function(event){
+            if (event.target == pokemodal) {
+              poke_close();
+            }
+          });
           img.addEventListener('click', function() {
             const id = this.title;
             const sprite_url = 'https://pokeapi.co/api/v2/pokemon/'+id;

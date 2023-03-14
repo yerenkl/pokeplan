@@ -14,6 +14,13 @@ let pokedate=function(){
   const today = `${day}/${month}/${year}`;
   return today
 }
+
+var modalOverlay = document.getElementById("myModal");
+  modalOverlay.addEventListener('click', function(event){
+    if (event.target == modalOverlay) {
+      cls();
+    }
+  });
 // Render the todo list
 const renderTodos = () => {
   ul.innerHTML = "";
