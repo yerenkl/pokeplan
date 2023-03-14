@@ -25,18 +25,24 @@ let iterativeFunction = function (arr, x) {
 
 
 function daysBetweenTodayAndDate() {
-  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
-  let myArray = JSON.parse(localStorage.getItem('pokeArray'));
-  let dateString=myArray[myArray.length-1]["today"]
-  const now = new Date();
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dateArr = dateString.split("/");
-  const day = parseInt(dateArr[0]);
-  const month = parseInt(dateArr[1]) - 1; // JS months are 0-indexed (0 = January)
-  const year = parseInt(dateArr[2]);
-  const otherDate = new Date(year, month, day);
-  const diffInMilliseconds = Math.abs(today - otherDate);
-  return Math.round(diffInMilliseconds / oneDay);
+  try{
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+    let dateString=myArray[myArray.length-1]["today"]
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const dateArr = dateString.split("/");
+    const day = parseInt(dateArr[0]);
+    const month = parseInt(dateArr[1]) - 1; // JS months are 0-indexed (0 = January)
+    const year = parseInt(dateArr[2]);
+    const otherDate = new Date(year, month, day);
+    const diffInMilliseconds = Math.abs(today - otherDate);
+    return Math.round(diffInMilliseconds / oneDay);
+  }
+  catch{
+    return 0;
+  }
+
 }
     let shinyChance=4096;
     let random_number=String(Math.floor(Math.random() * 905));
