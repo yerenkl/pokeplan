@@ -116,8 +116,18 @@
 <div class="container-fluid p-5 text-white text-center user-select-none">
   <h1 id="head">GOTTA CATCH 'EM ALL</h1>
   <b id="text" >COMPLETE YOUR TASKS FOR CATCH THE POKEMON!</b>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" href="#home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" onclick="loadStorage()" href="#storage">Storage</a>
+    </li>
+  </ul>
 </div>
-<div class="row container-fluid user-select-none ">
+<div class="tab-content">
+  <div id="home" class="tab-pane active">
+    <div class="row container-fluid user-select-none ">
     <div class="col-sm">
         <p>
           <div class="d-flex justify-content-between align-items-center">
@@ -145,10 +155,18 @@
       </div>
     </div>
 </div>
+  </div>
+  <div id="storage" class="container tab-pane fade">
+    <div class="row"> <div id="spritesContainer"></div></div>
+  </div>
+</div>
+
+
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close text-center" style="font-family: 'Title', sans-serif;" id="tasks" onclick="cls()">&times;</span>
   </div>
 </div>
 <script src="todo.js"></script>
+<script src="storage.js"></script>
 </body>

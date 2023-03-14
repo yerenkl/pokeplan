@@ -42,6 +42,9 @@ let iterativeFunction = function (arr, x) {
         localStorage.last_date=yymmdd()
       }
       else{
+        let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+        localStorage.clear()
+        localStorage.setItem('pokeArray', JSON.stringify(myArray));
         localStorage.todays_catch=0
         localStorage.last_date=yymmdd()
         localStorage.last_number=random_number
@@ -54,10 +57,10 @@ let iterativeFunction = function (arr, x) {
       localStorage.last_date=yymmdd()
       localStorage.shiny_chance=shiny_chance
     }
-    console.log(localStorage.last_number)
-    console.log(localStorage.last_date)
-    console.log(yymmdd())
-    console.log(random_number)
+    if(localStorage.getItem("todays_catch") == null){
+      localStorage.todays_catch=0
+    }
+    
     
     const baseUrl = 'https://pokeapi.co/api/v2/pokemon-species/'+random_number;
 try {

@@ -46,6 +46,7 @@ const btn = () => {
       localStorage.setItem('pokeArray', JSON.stringify(myArray));
     }
     localStorage.todays_catch=1
+    
     console.log(localStorage.pokeArray)
   }
   else if(notStriked>0){
