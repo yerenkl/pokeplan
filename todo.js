@@ -21,6 +21,7 @@ var modalOverlay = document.getElementById("myModal");
       cls();
     }
   });
+  
 // Render the todo list
 const renderTodos = () => {
   ul.innerHTML = "";

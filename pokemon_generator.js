@@ -74,6 +74,7 @@ function daysBetweenTodayAndDate() {
       }
       else{ //new day
         let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+        
         if(daysBetweenTodayAndDate()==1){
           localStorage.dailyStreak++
           if(localStorage.daily_streak==5){
@@ -94,7 +95,7 @@ function daysBetweenTodayAndDate() {
           else if(localStorage.daily_streak>=30){
             shinyChance=64
           }
-          if(localStorage.daily_streak>=100){
+          if(localStorage.daily_streak>=50){
             shinyChance=32
           }
         }
@@ -148,6 +149,8 @@ try {
         }
       }
       const sprite_url = data.varieties[0].pokemon.url;
+      
+      console.log(sprite_url)
       let html = pokemon_text.replace(/\f/g, "\n")
                       .replace(/\u00ad\n/g, "")
                       .replace(/\u00ad/g, "")
@@ -201,6 +204,13 @@ try {
           let sprite
           if(localStorage.is_shiny==1){
             sprite=data.sprites.front_shiny;
+            document.getElementById("head").style.color="#E38B29";
+            document.getElementById('pokemon_name').style.color ='#8E3200';
+            document.getElementById("titles").style.background="linear-gradient(to right, #E38B29, #181818)";
+            document.getElementById("text").innerText="SHINY POKEMON HAS BEEN SPOTTED!"
+            document.getElementById("a").style.color="#F1A661";
+            document.getElementById("b").style.color="#F1A661";
+            document.getElementById("titles").style.color="#FDEEDC";;
           }
           else{
             sprite = data.sprites.front_default;
@@ -210,7 +220,7 @@ try {
           }
           
           if(localStorage.todays_catch==0){
-            document.getElementById('ae').src = sprite;}
+            document.getElementById('ae').src = sprite}
           else{
             document.getElementById("titles").textContent="Pokemon was caught!"
             document.getElementById("ae").src="./pokeball.png"

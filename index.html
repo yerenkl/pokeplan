@@ -123,10 +123,10 @@
   <b id="text" >COMPLETE YOUR TASKS TO CATCH THE POKEMON!</b>
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" href="#home">Home</a>
+      <a class="nav-link active" id="a" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" href="#home">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" onclick="displayPokemon()" href="#storage">Storage</a>
+      <a class="nav-link" id="b" style="font-family: 'Poke', sans-serif; color:#ff675e" data-bs-toggle="tab" onclick="displayPokemon()" href="#storage">Storage</a>
     </li>
   </ul>
   <b id="daily_streak" style="font-family: 'Poke', sans-serif; color:#ff675e"></b>
@@ -183,9 +183,10 @@
           <img class="img-fluid" id="off_art" alt="Offical Art">
         </div>
         <div class="col-md-6">
-          <b id="poke_name" style="font-family: 'Title', sans-serif; font-size: 25px; color:#ff675e" ></b>
-          <p id="poke_info"  style="font-family: 'Poke', sans-serif; font-size: 15px; color:#000000" >Deneme Text</p>
-          <p id="date_info"  style="font-family: 'Poke', sans-serif; font-size: 15px; color:#000000" >Deneme Text</p>
+          <b id="poke_name" style="font-family: 'Title', sans-serif; font-size: 25px; color:#ff675e" >&#11088;</b>
+          <b class="user-select-none" style="font-size:25px" id="star"></b>
+          <p id="poke_info"  style="font-family: 'Poke', sans-serif; font-size: 15px; color:#000000" ></p>
+          <p id="date_info"  style="font-family: 'Poke', sans-serif; font-size: 15px; color:#000000" ></p>
         </div>
       </div>
     </div>

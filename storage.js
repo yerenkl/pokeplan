@@ -82,6 +82,7 @@ console.log(lenn)
                   let official_art
                   if(shiny==1) {
                     official_art=data.sprites.other['official-artwork'].front_shiny
+                    document.getElementById("star").innerHTML="&#11088";
                   }
                   else{
                     official_art=data.sprites.other['official-artwork'].front_default
