@@ -42,13 +42,14 @@ let iterativeFunction = function (arr, x) {
         localStorage.last_date=yymmdd()
       }
       else{
-        localStorage.clear()
+        localStorage.todays_catch=0
         localStorage.last_date=yymmdd()
         localStorage.last_number=random_number
         localStorage.shiny_chance=shiny_chance
       }
     }
     else{
+      localStorage.todays_catch=0
       localStorage.last_number=random_number
       localStorage.last_date=yymmdd()
       localStorage.shiny_chance=shiny_chance
@@ -132,7 +133,14 @@ try {
           else{
             sprite = data.sprites.front_default;
           }
-          document.getElementById('ae').src = sprite;
+          if(localStorage.todays_catch==0){
+            document.getElementById('ae').src = sprite;}
+          else{
+            document.getElementById("titles").textContent="Pokemon was caught!"
+            document.getElementById("ae").src="./pokeball.png"
+            document.getElementById("ae").style.width="40px"
+            document.getElementById("ae").style.height="40px"
+          }
           // document.getElementById('ae').style.filter="brightness(0)"
           
         })
