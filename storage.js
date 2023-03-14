@@ -1,21 +1,35 @@
 // Base URL for PokeAPI
 
-let flag=0;
+var flag=0;
+var len;
+const spritesContainer = document.getElementById('spritesContainer');
+const pokemodal = document.getElementById('pokeModal');
 
-
-function loadStorage(){
-  if(flag==0){
-    displayPokemon();
-    flag=1;
-  }
+function sortArrayByNumber(array) {
+  array.sort(function(a, b) {
+    return parseInt(a.number) - parseInt(b.number);
+  });
+  return array;
 }
-  const basee = 'https://pokeapi.co/api/v2/';
-  const spritesContainer = document.getElementById('spritesContainer');
-  let myArray = JSON.parse(localStorage.getItem('pokeArray'));
-  const pokemodal = document.getElementById('pokeModal');
 
+try{
+  len=myArray.length;
+}
+catch{
+  len=0;
+}
+const lenn=len;
+console.log(lenn)
+  
   // Function to fetch and display the Pokemon sprites
   function displayPokemon() {
+    try
+    {while (spritesContainer.firstChild) {
+      spritesContainer.removeChild(spritesContainer.lastChild);
+    }}
+    catch{}
+    let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+    myArray=sortArrayByNumber(myArray)
     console.log(myArray)
     for (let i = 0; i < myArray.length; i++) {
       pokemonNumber=myArray[i]["number"]
