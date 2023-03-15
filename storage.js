@@ -20,14 +20,15 @@ function loadStorage(){
     for (let i = 0; i < myArray.length; i++) {
       pokemonNumber=myArray[i]["number"]
       is_shiny=myArray[i]["is_shiny"]
+      date=myArray[i]["today"]
       console.log(pokemonNumber)
       console.log(is_shiny)
-      fetchAndDisplaySprites(pokemonNumber,is_shiny);
+      fetchAndDisplaySprites(pokemonNumber,is_shiny,date);
     }
   }
 
   // Call the function to fetch and display the Pokemon sprites
-  function fetchAndDisplaySprites(id,shiny){
+  function fetchAndDisplaySprites(id,shiny,today){
     const sprite_url = 'https://pokeapi.co/api/v2/pokemon/'+id;
     console.log(sprite_url)
     try {
@@ -51,6 +52,7 @@ function loadStorage(){
           img.addEventListener('click', function() {
             const id = this.title;
             const sprite_url = 'https://pokeapi.co/api/v2/pokemon/'+id;
+            const text_url = 'https://pokeapi.co/api/v2/pokemon-species/'+id;
             try {
               fetch(sprite_url)
                 .then(response => {
@@ -66,6 +68,33 @@ function loadStorage(){
                     official_art=data.sprites.other['official-artwork'].front_default
                   }
                   document.getElementById("off_art").src=official_art
+                  document.getElementById("poke_name").innerText=data.name
+                  document.getElementById("date_info").innerText="Caught on "+today 
+                  try {
+                    fetch(text_url)
+                      .then(response => {
+                        const responseJson = response.json();
+                        return responseJson;
+                      })
+                      .then(info => {
+                        const pokemons = info.flavor_text_entries;
+                        for (const element of pokemons) {
+                          if (element.language.name === 'en') {
+                            pokemon_text = element.flavor_text;
+                            break;
+                          }
+                        }
+                        let html = pokemon_text.replace(/\f/g, "\n")
+                                        .replace(/\u00ad\n/g, "")
+                                        .replace(/\u00ad/g, "")
+                                        .replace(/ -\n/g, " - ")
+                                        .replace(/-\n/g, "-")
+                                        .replace(/\n/g, " ");
+                        document.getElementById("poke_info").innerText=html
+                                        })
+                  } catch (error) {
+                    console.error(error);
+                  }
                   pokemodal.style.display = "block";
                 })
             } catch (error) {
