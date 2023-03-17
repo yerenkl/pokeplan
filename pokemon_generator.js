@@ -23,7 +23,6 @@ let iterativeFunction = function (arr, x) {
 
 
     let random_number=String(Math.floor(Math.random() * 905));
-    shiny_chance=Math.floor(Math.random() * 200);
     k=0;
     legendary_array=[143,144,145,149,150,242,243,244,248,249,250,376,377,378,379,
     380,381,382,383,384,385,479,480,481,482,483,484,485,486,487,488,489,490,
@@ -35,19 +34,17 @@ let iterativeFunction = function (arr, x) {
       k++;
     }  
 
-    if(localStorage.getItem("first_time") == null){
+    if(localStorage.getItem("first_time") == null){ //fresh clear
       localStorage.clear()
       localStorage.first_time=1;
     }
 
-
     if(localStorage.getItem("last_date") != null){
-      if(localStorage.last_date==yymmdd()){
+      if(localStorage.last_date==yymmdd()){ //same day
         random_number=localStorage.last_number
-        shiny_chance=localStorage.shiny_chance
         localStorage.last_date=yymmdd()
       }
-      else{
+      else{ //new day
         let myArray = JSON.parse(localStorage.getItem('pokeArray'));
         localStorage.clear()
         localStorage.setItem('pokeArray', JSON.stringify(myArray));
@@ -55,17 +52,24 @@ let iterativeFunction = function (arr, x) {
         localStorage.first_time=1;
         localStorage.last_date=yymmdd()
         localStorage.last_number=random_number
-        localStorage.shiny_chance=shiny_chance
       }
     }
     else{
       localStorage.todays_catch=0
       localStorage.last_number=random_number
       localStorage.last_date=yymmdd()
-      localStorage.shiny_chance=shiny_chance
     }
     if(localStorage.getItem("todays_catch") == null){
       localStorage.todays_catch=0
+    }
+
+    if(localStorage.is_shiny == null){
+      if( Math.floor(Math.random() * 200)<=1){
+        localStorage.is_shiny=1
+      }
+      else{
+        localStorage.is_shiny=0
+      }
     }
     
     
@@ -137,12 +141,13 @@ try {
         })
         .then(data => {
           let sprite
-          if (shiny_chance<=1){
+          if(localStorage.is_shiny==1){
             sprite=data.sprites.front_shiny;
           }
           else{
             sprite = data.sprites.front_default;
           }
+          
           if(localStorage.todays_catch==0){
             document.getElementById('ae').src = sprite;}
           else{

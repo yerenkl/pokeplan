@@ -13,6 +13,11 @@
     margin: 0px;
     background-color: #181818;
     }
+    #off_art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* scale the image to fit within the container, maintaining aspect ratio */
+}
     .modal {
     display: none; 
     position: fixed; 
@@ -167,6 +172,23 @@
     <span class="close text-center" style="font-family: 'Title', sans-serif;" id="tasks" onclick="cls()">&times;</span>
   </div>
 </div>
+
+<div id="pokeModal" class="modal">
+  <div class="modal-content">
+    <div class="container-fluid">
+      <span class="close" id="close" onclick="poke_close()">&times;</span>
+      <div class="row">
+        <div class="col-md-6">
+          <img class="img-fluid" id="off_art" alt="Offical Art">
+        </div>
+        <div class="col-md-6">
+          <p>Deneme Text</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="todo.js"></script>
 <script src="storage.js"></script>
 </body>

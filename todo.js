@@ -6,6 +6,14 @@ var span = document.getElementById("close");
 // Get the todo list from local storage
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
+let pokedate=function(){
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // add leading zero if needed
+  const day = String(now.getDate()).padStart(2, '0'); // add leading zero if needed
+  const today = `${day}/${month}/${year}`;
+  return today
+}
 // Render the todo list
 const renderTodos = () => {
   ul.innerHTML = "";
@@ -24,6 +32,13 @@ function cls() {
   modal.style.display = "none";
 }
 
+const addPokemon = (pokemonNumber, isShiny) => {
+  const newPokemon = { number: pokemonNumber, is_shiny: isShiny, today:pokedate()};
+  let pokeArray = JSON.parse(localStorage.getItem('pokeArray'));
+  pokeArray.push(newPokemon);
+  localStorage.setItem("pokeArray", JSON.stringify(pokeArray));
+};
+
 const btn = () => {
   modal.style.display = "block";
   const total = todos.length;
@@ -37,16 +52,13 @@ const btn = () => {
     document.getElementById("ae").style.width="40px"
     document.getElementById("ae").style.height="40px"
     if (localStorage.pokeArray==null){
-      let myArray=[localStorage.last_number]
-      localStorage.setItem('pokeArray', JSON.stringify(myArray));
+      pokeArray=[{ number: localStorage.last_number, is_shiny: localStorage.is_shiny,today:pokedate() }];
+      localStorage.setItem("pokeArray", JSON.stringify(pokeArray));
     }
     else if(localStorage.todays_catch==0){
-      let myArray = JSON.parse(localStorage.getItem('pokeArray'));
-      myArray.push(localStorage.last_number)
-      localStorage.setItem('pokeArray', JSON.stringify(myArray));
+      addPokemon(localStorage.last_number,localStorage.is_shiny)
     }
     localStorage.todays_catch=1
-    
     console.log(localStorage.pokeArray)
   }
   else if(notStriked>0){
