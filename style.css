@@ -59,7 +59,7 @@ body{
     }
     @font-face {
 			font-family: 'Title';
-			src: url('./04B_30__.TTF') format('truetype');
+			src: url('./04B_30__.ttf') format('truetype');
 			font-weight: normal;
 			font-style: normal;
 		}
