@@ -57,11 +57,6 @@ function daysBetweenTodayAndDate() {
       k++;
     }  
 
-    if(localStorage.getItem("first_time") == null){ //fresh clear
-      localStorage.clear()
-      localStorage.first_time=0;
-    }
-
     if(localStorage.getItem("dailyStreak") == null){ //fresh clear
       localStorage.dailyStreak=0
     }
@@ -107,7 +102,6 @@ function daysBetweenTodayAndDate() {
         localStorage.dailyStreak=daily_streak
         localStorage.setItem('pokeArray', JSON.stringify(myArray));
         localStorage.todays_catch=0
-        localStorage.first_time=1;
         localStorage.last_date=yymmdd()
         localStorage.last_number=random_number
       }
