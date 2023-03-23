@@ -7,6 +7,8 @@ let yymmdd=function(){
   return today
 }
 
+
+
 let iterativeFunction = function (arr, x) {
     let start=0, end=arr.length-1;
     while (start<=end){
@@ -22,6 +24,21 @@ let iterativeFunction = function (arr, x) {
 }
 
 
+function daysBetweenTodayAndDate() {
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+  let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+  let dateString=myArray[myArray.length-1]["today"]
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dateArr = dateString.split("/");
+  const day = parseInt(dateArr[0]);
+  const month = parseInt(dateArr[1]) - 1; // JS months are 0-indexed (0 = January)
+  const year = parseInt(dateArr[2]);
+  const otherDate = new Date(year, month, day);
+  const diffInMilliseconds = Math.abs(today - otherDate);
+  return Math.round(diffInMilliseconds / oneDay);
+}
+    let shinyChance=4096;
     let random_number=String(Math.floor(Math.random() * 905));
     k=0;
     legendary_array=[143,144,145,149,150,242,243,244,248,249,250,376,377,378,379,
@@ -36,9 +53,14 @@ let iterativeFunction = function (arr, x) {
 
     if(localStorage.getItem("first_time") == null){ //fresh clear
       localStorage.clear()
-      localStorage.first_time=1;
+      localStorage.first_time=0;
     }
 
+    if(localStorage.getItem("dailyStreak") == null){ //fresh clear
+      localStorage.dailyStreak=0
+    }
+
+    console.log(localStorage.dailyStreak)
     if(localStorage.getItem("last_date") != null){
       if(localStorage.last_date==yymmdd()){ //same day
         random_number=localStorage.last_number
@@ -46,7 +68,36 @@ let iterativeFunction = function (arr, x) {
       }
       else{ //new day
         let myArray = JSON.parse(localStorage.getItem('pokeArray'));
+        if(daysBetweenTodayAndDate()==1){
+          localStorage.dailyStreak++
+          if(localStorage.daily_streak==5){
+            shinyChance=2048
+          }
+          else if(localStorage.daily_streak==10){
+            shinyChance=1024
+          }
+          else if(localStorage.daily_streak==15){
+            shinyChance=512
+          }
+          else if(localStorage.daily_streak==20){
+            shinyChance=256
+          }
+          else if(localStorage.daily_streak==25){
+            shinyChance=128
+          }
+          else if(localStorage.daily_streak>=30){
+            shinyChance=64
+          }
+          if(localStorage.daily_streak>=100){
+            shinyChance=32
+          }
+        }
+        else{
+          localStorage.dailyStreak=0
+        }
+        let daily_streak=localStorage.dailyStreak
         localStorage.clear()
+        localStorage.dailyStreak=daily_streak
         localStorage.setItem('pokeArray', JSON.stringify(myArray));
         localStorage.todays_catch=0
         localStorage.first_time=1;
@@ -62,17 +113,18 @@ let iterativeFunction = function (arr, x) {
     if(localStorage.getItem("todays_catch") == null){
       localStorage.todays_catch=0
     }
+    
 
     if(localStorage.is_shiny == null){
-      if( Math.floor(Math.random() * 200)<=1){
+      if( Math.floor(Math.random() * shinyChance)<=1){
         localStorage.is_shiny=1
       }
       else{
         localStorage.is_shiny=0
       }
     }
-    
-    
+    console.log(localStorage.dailyStreak)
+    console.log(daysBetweenTodayAndDate())
     const baseUrl = 'https://pokeapi.co/api/v2/pokemon-species/'+random_number;
 try {
   fetch(baseUrl)
@@ -146,6 +198,9 @@ try {
           }
           else{
             sprite = data.sprites.front_default;
+          }
+          if(localStorage.dailyStreak>=2){
+            document.getElementById("daily_streak").innerHTML=localStorage.dailyStreak+" Day Streak!";
           }
           
           if(localStorage.todays_catch==0){
